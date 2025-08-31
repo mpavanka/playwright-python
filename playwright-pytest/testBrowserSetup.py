@@ -17,3 +17,4 @@ def test_playwrightShortCut(page:Page, credentials):
     page.goto("https://facebook.com")
     page.locator("[name='email']").fill(userName)
     page.locator("[name='pass']").fill(passWord)
+    page.locator("[name='login']").click()
