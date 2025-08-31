@@ -1,0 +1,5 @@
+Reuse parent constructor → use super() or direct call.
+
+Skip parent constructor → override __init__ without calling it.
+
+No need for child __init__ → don’t override, just inherit directly.
