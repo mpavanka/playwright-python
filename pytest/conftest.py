@@ -19,3 +19,5 @@ def functioncommonSetUp():
 @pytest.fixture(scope="class")
 def classcommonSetUp():
     print("am in common class or fixture")
+    yield
+    print("Tear down process for class from conftest file ")
