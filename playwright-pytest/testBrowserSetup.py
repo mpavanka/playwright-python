@@ -1,18 +1,21 @@
 import pytest
 from playwright.sync_api import Page
+import json
+import os
+
+file_path = os.path.join(os.path.dirname(__file__), "..", "DATA", "creds.json")
+with open(file_path, "r") as f:
+    data = json.load(f)
+    creds = data["userCreds"]
 
 
-# def test_openBrowser(playwright):
-#     browser = playwright.chromium.launch(headless=False, slow_mo=50, channel="msedge")
-#     context = browser.new_context()
-#     page = context.new_page()
-#     page.goto("https://www.example.com")
-#     page.wait_for_timeout(50000) # Wait for 50 seconds to observe the browser
-#     browser.close()
+@pytest.fixture(params=creds)
+def credentials(request):
+    return request.param["username"], request.param["password"]
 
-def test_playwrightShortCut(page:Page, credentials):
+def test_playwrightShortCut(openBrowser, credentials):
+    page = openBrowser
     userName, passWord = credentials
-
     print(f"Username: {userName}, Password: {passWord}")
     page.goto("https://facebook.com")
     page.locator("[name='email']").fill(userName)
