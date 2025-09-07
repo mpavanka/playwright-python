@@ -29,6 +29,7 @@ class TestFKboard:
             ("Processor", "Core i7"),
             ("Customer Ratings", "4★ & above"),
         ]
+        self.page.screenshot(path="screenshots/Before_Filter.png", full_page=True)
         for category, option in filters:
             attributeValue  = self.page.locator("//div[normalize-space(text())='" + category +"']/following-sibling::*").get_attribute("class")
             if "rZzKt4" not in attributeValue:
