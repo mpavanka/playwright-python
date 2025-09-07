@@ -20,7 +20,7 @@ def openBrowser(playwright, credentials):
     userName, passWord, browser_name = credentials
     # if browser_name not in ["chromium", "firefox", "webkit"]:
     #     raise ValueError(f"Unsupported browser: {browser_name}. Choose from 'chromium', 'firefox', 'webkit'.")
-    browser = getattr(playwright, browser_name).launch(headless=False, slow_mo=50)
+    browser = getattr(playwright, browser_name).launch(headless=True)
     context = browser.new_context()
     page = context.new_page()
     page.goto("https://flipkart.com")
