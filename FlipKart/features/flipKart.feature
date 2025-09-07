@@ -1,6 +1,6 @@
 Feature: FlipKart Dashboard Validations
 
-  Background:
+  Scenario: Search for a product
     Given User is on FlipKart homepage
     When User searches for "laptop"
     Then User should see the search results page with relevant products
@@ -8,7 +8,7 @@ Feature: FlipKart Dashboard Validations
 #   Scenario: Validate product search results
 #     Then User should see at least one product in the search results
 
-#   Scenario: Filter products by Price Range
+#   Scenario: Filter products by Price Rangesss
 #     When User sets the price range filter to "20000" to "50000"
 #     Then User should see products within the specified price range
 

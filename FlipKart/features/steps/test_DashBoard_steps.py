@@ -1,15 +1,18 @@
 from behave import given, when, then
-from behave import *
-from playwright.sync_api import sync_playwright
-    
-@given("User is on FlipKart homepage")
-def user_is_on_FlipKart_login_page(self):
-    print("User is on FlipKart login page")
+from stepDefinations.flipkartDashboardvalidations import TestFKboard
+import logging
 
-@when("User searches for {string}")
-def user_searches_for(self, product):
-    pass
+@given("User is on FlipKart homepage")
+def step_homepage(context):
+    TestFKboard.set_up(context)
+    logging.info("✅ Step matched: User is on FlipKart homepage")
+
+
+@when('User searches for "{product}"')
+def step_search(context, product):
+    TestFKboard.test_dashboard_page(context,product)
+    logging.info(f"✅ Step matched: User searches for {product}")
 
 @then("User should see the search results page with relevant products")
-def user_should_see_the_search_results_page_with_relevant_products(self):
-    pass
+def step_results(context):
+    logging.info("✅ Step matched: Results page is shown")

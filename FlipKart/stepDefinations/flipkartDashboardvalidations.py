@@ -1,20 +1,19 @@
 import pytest
-from playwright.sync_api import Page
+from playwright.sync_api import Page, Playwright, sync_playwright
 
 @pytest.mark.usefixtures("test_setup")
 class TestFKboard:
 
-    @pytest.fixture(scope="class", autouse=True)
-    def test_setup(self, request, openBrowser: Page):
+    def set_up(self):
+        
         print("This is FlipKart Dashboard validations class")
-        request.cls.page = openBrowser   # attach to class
+        playwright = sync_playwright().start()
+        browser = playwright.chromium.launch(headless=False, slow_mo=50)
+        context = browser.new_context()
+        self.page = context.new_page()
+        self.page.goto("https://flipkart.com")
 
-    filters = [
-            ("Brand", "HP"),
-            ("Processor", "Core i7"),
-            ("Customer Ratings", "4★ & above"),
-        ]
-
+    
     def test_dashboard_page(self, product):
         product = product
         self.page.get_by_placeholder("Search for Products, Brands and More").click()
