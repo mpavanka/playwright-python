@@ -36,7 +36,7 @@ jobs:
 
       - name: Run Playwright tests
         run: |
-          pytest -s Flipkart/pages/FlipKart/pages/test_Dashboard_validations.py --html=report.html --self-contained-html
+          pytest -s FlipKart/pages/test_Dashboard_validations.py --html=report.html --self-contained-html
         continue-on-error: false
 
       - name: Upload pytest reports
