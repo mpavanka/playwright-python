@@ -32,6 +32,7 @@ jobs:
           pip install playwright
           pip install behave
           playwright install
+          pip install pytest-html
 
       - name: Run Playwright tests
         run: |
