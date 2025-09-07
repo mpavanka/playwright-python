@@ -38,8 +38,9 @@ jobs:
           pytest -s Flipkart/pages/FlipKart/pages/test_Dashboard_validations.py --html=report.html --self-contained-html
         continue-on-error: false
 
-      - name: Upload test results
+      - name: Upload pytest reports
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: test-results
+            name: pytest-report
+            path: reports/
