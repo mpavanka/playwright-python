@@ -15,7 +15,7 @@ class TestFKboard:
             ("Customer Ratings", "4★ & above"),
         ]
 
-    def test_dashboard_page(self, product):
+    def test_dashboard_page(self):
         self.page.get_by_placeholder("Search for Products, Brands and More").click()
         self.page.locator("input[name='q']").fill("laptop")
         self.page.keyboard.press("Enter")
