@@ -16,12 +16,12 @@ class TestFKboard:
         ]
 
     def test_dashboard_page(self, product):
-        product = product
         self.page.get_by_placeholder("Search for Products, Brands and More").click()
-        self.page.locator("input[name='q']").fill(product)
+        self.page.locator("input[name='q']").fill("laptop")
         self.page.keyboard.press("Enter")
         self.page.wait_for_load_state("networkidle")
         self.page.wait_for_timeout(5000)
+        self.page.screenshot(path="screenshots/Search_Results.png", full_page=True)
     
     def test_select_Filter(self):
         filters = [
@@ -39,6 +39,7 @@ class TestFKboard:
             self.page.wait_for_load_state("networkidle")
             self.page.wait_for_timeout(5000)
         self.page.select_option("//div[@class='tKgS7w']/select", "50000")
+        self.page.screenshot(path="screenshots/After_Apply_Filter.png", full_page=True)
 
     def test_validate_and_clear_filters(self):
         selectedFilters = self.page.locator("//section[@class='pgRLLn _2OLUF3']/div[2]/div[1]/div")
@@ -50,8 +51,10 @@ class TestFKboard:
             print("-------------------------------------------")
             assert (selectedFilters.nth(2).text_content()), option
             counter+=1
+        self.page.screenshot(path="screenshots/Before_Clear_Filter.png", full_page=True)    
         self.page.locator("//*[@id='container']/div/div[3]/div/div[1]/div/div[1]/div/section[1]/div[1]/div[2]/span").click()
         self.page.wait_for_load_state("networkidle")
         self.page.wait_for_timeout(5000)
         assert selectedFilters.count() == 0
+        self.page.screenshot(path="screenshots/After_Clear_Filter.png", full_page=True)
     
