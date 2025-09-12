@@ -7,6 +7,24 @@ pipeline {
     }
 
     stages {
+
+        stage('Input Parameters') {
+            steps {
+                script {
+                    def userInput = input(
+                        id: 'userInput', message: 'Provide Input Parameters', parameters: [
+                            string(name: 'BROWSER', defaultValue: 'chromium', description: 'Browser to run tests (chromium, firefox, webkit)'),
+                            string(name: 'ENVIRONMENT', defaultValue: 'staging', description: 'Environment to run tests (staging, production)')
+                            string(name: 'TEST_SUITE', defaultValue: 'smoke', description: 'Test suite to run (smoke, regression)')
+                        ]
+                    )
+                    env.BROWSER = userInput.BROWSER
+                    env.ENVIRONMENT = userInput.ENVIRONMENT
+                    echo "Selected Browser: ${env.BROWSER}"
+                    echo "Selected Environment: ${env.ENVIRONMENT}"
+                }
+            }
+        }
         stage('Checkout') {
             steps {
                 echo "Checking out repository..."
