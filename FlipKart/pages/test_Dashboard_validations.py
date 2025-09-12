@@ -38,7 +38,7 @@ class TestFKboard:
             self.page.locator("//div/label/div[text()='"+ (option) +"']").click()
             self.page.wait_for_load_state("networkidle")
             self.page.wait_for_timeout(5000)
-        self.page.select_option("//div[@class='tKgS7w']/select", "50000")
+        # self.page.select_option("//div[@class='tKgS7w']/select", "50000")
         self.page.screenshot(path="screenshots/After_Apply_Filter.png", full_page=True)
 
     def test_validate_and_clear_filters(self):
