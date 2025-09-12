@@ -1,0 +1,61 @@
+pipeline {
+    agent any   // runs directly on Jenkins controller
+
+  environment {
+        PYTHON_HOME = "C:\\Users\\Windows 10\\AppData\\Local\\Programs\\Python\\Python313"
+        PATH = "${PYTHON_HOME};${PYTHON_HOME}\\Scripts;${env.PATH}"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo "Checking out repository..."
+                git branch: 'main', url: 'https://github.com/mpavanka/playwright-python.git'
+            }
+        }
+
+        // stage('Set up Python Environment') {
+        //     steps {
+        //         sh '''
+        //             python --version
+        //             python -m venv venv
+        //             . venv/bin/activate
+        //             pip install --upgrade pip
+        //         '''
+        //     }
+        // }
+
+        stage('Install Dependencies') {
+            steps {
+                sh '''
+                    pip install pytest pytest-playwright playwright behave pytest-html
+                    playwright install --with-deps
+                '''
+            }
+        }
+
+        stage('Run Playwright Tests') {
+            steps {
+                sh '''
+                  
+                    pytest -s FlipKart/pages/test_Dashboard_validations.py \
+                           --html=report.html \
+                           --self-contained-html \
+                           --my-browser=chromium
+                '''
+            }
+        }
+
+        stage('Archive Reports') {
+            steps {
+                archiveArtifacts artifacts: 'report.html', fingerprint: true
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "Pipeline finished. Reports archived."
+        }
+    }
+}
