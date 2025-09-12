@@ -38,10 +38,8 @@ pipeline {
             steps {
                 sh '''
                   
-                    pytest -s FlipKart/pages/test_Dashboard_validations.py \
-                           --html=report.html \
-                           --self-contained-html \
-                           --my-browser=chromium
+                    PYTHONUTF8=1 pytest -s FlipKart/pages/test_Dashboard_validations.py --html=report.html --self-contained-html
+
                 '''
             }
         }
