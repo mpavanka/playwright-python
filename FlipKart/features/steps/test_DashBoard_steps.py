@@ -1,5 +1,5 @@
 from behave import given, when, then
-from stepDefinations.flipkartDashboardvalidations import TestFKboard
+from FlipKart.stepDefinations.test_flipkartDashboardvalidations import TestFKboard
 import logging
 
 @given("User is on FlipKart homepage")
