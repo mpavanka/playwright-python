@@ -36,7 +36,7 @@ jobs:
 
       - name: Run Playwright tests
         run: |
-          pytest -s FlipKart/pages/test_Dashboard_validations.py --html=report.html --self-contained-html --my-browser=chromium
+          pytest -s FlipKart/pages/test_Dashboard_validations.py --html=reports/report.html --self-contained-html --my-browser=chromium
         continue-on-error: false
 
       - name: Upload pytest reports
